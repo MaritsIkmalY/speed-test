@@ -11,9 +11,113 @@
 .bg-glass {
   /* From https://css.glass */
   background: rgba(243, 243, 243, 0.08);
-  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(9.3px);
   -webkit-backdrop-filter: blur(9.3px);
   border: 1px solid rgba(243, 243, 243, 1);
+}
+
+.border-gradient-circle {
+  width: 300px;
+  height: 80px;
+  border: double 1em transparent;
+  border-radius: 30px;
+  border-image: linear-gradient(
+    to right top,
+    #0b5355,
+    #1a6e71,
+    #298b8e,
+    #38a9ac,
+    #48c8cb,
+    #4ad1d4,
+    #4ddade,
+    #4fe3e7,
+    #44d8dc,
+    #37cdd1,
+    #2ac2c6,
+    #18b7bb
+  );
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.box {
+  position: relative;
+  padding: 20px 30px;
+  margin: 5px;
+  display: inline-block;
+  font-size: 30px;
+  width: 400px;
+  height: 400px;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0px 0px 1px 1px #0000001a;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 100%;
+  padding: 15px; /* control the border thickness */
+  background: linear-gradient(
+    to right top,
+    #0b5355,
+    #1a6e71,
+    #298b8e,
+    #38a9ac,
+    #48c8cb,
+    #4ad1d4,
+    #4ddade,
+    #4fe3e7,
+    #44d8dc,
+    #37cdd1,
+    #2ac2c6,
+    #18b7bb
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.gradient-green {
+  background: linear-gradient(
+    to right top,
+    #0b5355,
+    #1a6e71,
+    #298b8e,
+    #38a9ac,
+    #48c8cb,
+    #4ad1d4,
+    #4ddade,
+    #4fe3e7,
+    #44d8dc,
+    #37cdd1,
+    #2ac2c6,
+    #18b7bb
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.box:hover {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.6);
+    border-radius: 100%;
+  }
+
+  50% {
+    box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.3);
+    border-radius: 100%;
+  }
+
+  100% {
+    box-shadow: 0 0 0 60px rgba(0, 0, 0, 0);
+    border-radius: 100%;
+  }
 }

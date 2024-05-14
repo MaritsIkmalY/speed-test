@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./login.css">
+  
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./login.css">
     <title>Login</title>
 </head>
 
@@ -17,7 +18,7 @@
                 <div class="bg-login w-[370px] h-[370px] rounded-3xl"></div>
             </div>
 
-            <div class="flex flex-col gap-4 px-12 pt-24 pb-32 bg-glass rounded-bottom-right">
+            <div class="flex flex-col gap-4 px-12 pt-24 pb-32 rounded-bottom-right bg-glass">
                 <div class="text-white">
                     <h1 class="text-4xl font-semibold">Welcome</h1>
                     <p class="text-lg font-medium mt-1">Please login into your account</p>
