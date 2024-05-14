@@ -329,6 +329,7 @@ function initUI(){
 		</div>
 	</div>
 	<a href="https://github.com/librespeed/speedtest">Source code</a>
+	<a href="logout.php">logout</a>
 </div>
 <div id="privacyPolicy" style="display:none">
     <h2>Privacy Policy</h2>
