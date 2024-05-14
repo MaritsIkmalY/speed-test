@@ -3,6 +3,7 @@
 require 'telemetry_settings.php';
 require_once 'telemetry_db.php';
 require_once '../backend/getIP_util.php';
+session_start();
 
 $ip = getClientIp();
 $ispinfo = $_POST['ispinfo'];
@@ -17,7 +18,7 @@ $ul = $_POST['ul'];
 $ping = $_POST['ping'];
 $jitter = $_POST['jitter'];
 $log = $_POST['log'];
-$userId= 1;
+$userId= $_SESSION['id'];
 
 if (isset($redact_ip_addresses) && true === $redact_ip_addresses) {
     $ip = '0.0.0.0';

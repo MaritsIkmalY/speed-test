@@ -9,20 +9,22 @@
   <body>
     <?php
       include 'connect.php';
-
+      
       if(isset($_POST['submit'])) {
         $email    = strip_tags($_POST['email']);
         $password = strip_tags($_POST['password']);
         $messages = [];
 
+        $data = mysqli_query($connect, 'SELECT * FROM users WHERE email = "'.$email.'"')->fetch_assoc();
+
         if(empty($email) || empty($password)) {
           $messages[] = 'Silahkan isi semua data yang diperlukan!';
-        } elseif(count((array) mysqli_query($connect, 'SELECT email FROM users WHERE email = "'.$email.'"')->fetch_array()) == 0) {
+        } elseif(empty($data)) {
           $messages[] = 'Email tidak terdaftar!';
         } else {
-          $data = mysqli_query($connect, 'SELECT password, name FROM users')->fetch_assoc();
           if(password_verify($password, $data['password'])) {
-            $_SESSION['is_login'] = $data['name'];
+            $_SESSION['name'] = $data['name'];
+            $_SESSION['id'] = $data['id'];
             if($remember) {
               if(!isset($_COOKIE['is_logged'])) {
                 setcookie('_logged', substr(md5($email), 0, 10), time() + (60 * 60 * 24), '/');
