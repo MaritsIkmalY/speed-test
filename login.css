@@ -5,7 +5,7 @@
 }
 
 .bg-login {
-  background-image: url("../assets/logo.jpeg");
+  background-image: url("./assets/logo.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -37,6 +37,8 @@
   backdrop-filter: blur(9.3px);
   -webkit-backdrop-filter: blur(9.3px);
   border: 1px solid rgba(243, 243, 243, 1);
+  z-index: 2;
+  position: relative;
 }
 
 .input-container {
@@ -46,6 +48,8 @@
   outline: none;
   padding: 8px 16px;
   width: 300px;
+  z-index: 2;
+  position: relative;
 }
 
 .input-container img {
@@ -60,4 +64,30 @@
   font-size: 16px;
   width: 100%;
   background-color: transparent;
+
+}
+
+.bg-gradient {
+  background: linear-gradient(230.39deg, #000000 26.48%, #234258 110.1%);
+}
+
+/* Adjust the size of the bottom left image */
+.bottom-left-image {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 500px; 
+  height: auto;
+  z-index: 1;
+
+}
+
+/* Adjust the size of the bottom right image */
+.bottom-right-image {
+  position: absolute;
+  z-index: 1;
+  bottom: 20px;
+  right: 20px;
+  width: 500px; 
+  height: auto; 
 }
