@@ -80,6 +80,24 @@
   pointer-events: none;
 }
 
+.bg-gradient-3 {
+  background-image: linear-gradient(
+    to right top,
+    #0b5355,
+    #1a6e71,
+    #298b8e,
+    #38a9ac,
+    #48c8cb,
+    #4ad1d4,
+    #4ddade,
+    #4fe3e7,
+    #44d8dc,
+    #37cdd1,
+    #2ac2c6,
+    #18b7bb
+  );
+}
+
 .gradient-green {
   background: linear-gradient(
     to right top,
@@ -102,7 +120,7 @@
 }
 
 .box:hover {
-  animation: pulse-animation 2s infinite;
+  animation: pulse-animation 1s infinite;
 }
 
 @keyframes pulse-animation {
@@ -117,7 +135,7 @@
   }
 
   100% {
-    box-shadow: 0 0 0 60px rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 100px rgba(0, 0, 0, 0);
     border-radius: 100%;
   }
 }
