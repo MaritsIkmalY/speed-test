@@ -33,7 +33,7 @@
         }
     }
     ?>
-    <div class="bg-gradient w-full flex flex-col items-center h-screen justify-center bg-green-900">
+    <div class="bg-gradient w-full flex flex-col items-center h-screen justify-center bg-green-900 overflow-y-hidden">
         <div class="w-fit flex border-2 rounded-top-left rounded-bottom-right">
 
             <div class="bg-[#F8F2EA] px-10 py-20 rounded-inherit">
