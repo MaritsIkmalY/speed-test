@@ -126,7 +126,11 @@ $nameToDisplay = isset($_SESSION['guest']) ? $_SESSION['guest'] : $_SESSION['nam
 				drawMeter(I("dlMeter"), mbpsToAmount(Number(uiData.ulStatus * (status == 3 ? oscillate() : 1))), meterBk, ulColor, Number(uiData.ulProgress), progColor);
 				I("dlText2").textContent = (status == 1 && uiData.dlStatus == 0) ? "..." : format(uiData.ulStatus);
 				//drawMeter(I("ulMeter"), mbpsToAmount(Number(uiData.ulStatus * (status == 3 ? oscillate() : 1))), meterBk, ulColor, Number(uiData.ulProgress), progColor);
-			}
+			} else if(status == 4){
+				drawMeter(I("dlMeter"), mbpsToAmount(Number(0 * (status == 3 ? oscillate() : 1))), meterBk, ulColor, Number(0), progColor);
+				I("dlText2").textContent = '0.00';
+			} 
+			console.log(status);
 			I("ulText").textContent = (status == 3 && uiData.ulStatus == 0) ? "..." : format(uiData.ulStatus);
 			// I("ulText2").textContent = (status == 3 && uiData.ulStatus == 0) ? "..." : format(uiData.ulStatus);
 
