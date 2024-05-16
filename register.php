@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./login.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Login</title>
+    <title>Register</title>
 </head>
 
 <body>
     <?php
-    include 'connect.php';
+    include "connect.php";
 
     if (isset($_SESSION['id']) || isset($_SESSION['guest'])) {
         header("Location: index.php");
@@ -30,19 +30,25 @@
     if (isset($_POST['submit'])) {
         $email    = strip_tags($_POST['email']);
         $password = strip_tags($_POST['password']);
+        $name     = strip_tags($_POST['name']);
+        $timestamp = date('Y-m-d H:i:s');
+        $messages = [];
 
-        $data = mysqli_query($connect, 'SELECT * FROM users WHERE email = "' . $email . '"')->fetch_assoc();
-
-        if (empty($data)) {
-            $error = 'Email tidak terdaftar!';
+        if (empty($email) || empty($password) || empty($name)) {
+            $messages[] = 'Silahkan isi data yang diperlukan!';
         } else {
-            if (!password_verify($password, $data['password'])) {
-                $error = 'Kata sandi salah!';
-            } else {
+            $insert = mysqli_query($connect, 'INSERT INTO `users`(`email`, `name`, `password`, `timestamp`) VALUES("' . $email . '","' . $name . '", "' . password_hash($password, PASSWORD_BCRYPT) . '" , "' . $timestamp . '")');
+            if ($insert) {
+                $query = mysqli_query($connect, 'SELECT * FROM `users` WHERE `email` = "' . $email . '"');
+                $data = mysqli_fetch_assoc($query);
+
                 $_SESSION['name'] = $data['name'];
                 $_SESSION['id'] = $data['id'];
-                header('Location: index.php');
-                exit();
+
+                header('location: index.php');
+                exit;
+            } else {
+                $messages[] = 'Pendaftaran gagal!';
             }
         }
     }
@@ -54,10 +60,10 @@
                 <div class="bg-login w-[370px] h-[370px] rounded-3xl"></div>
             </div>
 
-            <div class="flex flex-col gap-4 px-12 pt-24 pb-32 bg-glass rounded-bottom-right h-[90vh]">
+            <div class="flex flex-col gap-4 px-12 pt-24 pb-32 bg-glass rounded-bottom-right">
                 <div class="text-white">
-                    <h1 class="text-4xl font-semibold">Welcome</h1>
-                    <p class="text-lg font-medium mt-1">Please login into your account</p>
+                    <h1 class="text-4xl font-semibold">Register</h1>
+                    <p class="text-lg font-medium mt-1">Please Register if you don't have an account</p>
                 </div>
                 <div class="col-md-12" style="margin-bottom: 6px;">
                     <?php
@@ -68,23 +74,27 @@
                 </div>
 
                 <form class="flex flex-col gap-6 mt-8" method="POST">
-                    <div class="input-container p-4">
+                    <div class="input-container p-4 w-full">
+                        <img src="./assets/people.png" alt="User Icon">
+                        <input type="text" placeholder="Name" name="name">
+                    </div>
+                    <div class="input-container p-4 w-full">
                         <img src="./assets/people.png" alt="User Icon">
                         <input type="email" placeholder="Email" name="email">
                     </div>
-                    <div class="input-container p-4">
+                    <div class="input-container p-4 w-full">
                         <img src="./assets/lock.png" alt="Lock Icon">
                         <input type="password" placeholder="Password" name="password">
                     </div>
 
-                    <button type="submit" name="submit" class="bg-[#0F5E61] py-3 text-white border-2 rounded-2xl mt-6"> Login</button>
+                    <button type="submit" name="submit" class="bg-[#0F5E61] py-3 text-white border-2 rounded-2xl mt-6"> Register</button>
                 </form>
-
                 <form method="POST" class="gap-2 flex flex-col">
                     <button name="guest" class="bg-[#0F5E61] py-3 text-white border-2 rounded-2xl mt-2"> Guest</button>
                 </form>
+
                 <p class="text-white text-center">
-                    Don't have account? <a class="ml-2 font-bold" href="register.php">register</a>
+                    Already have an account? <a class="ml-2 font-bold" href="login.php">login</a>
                 </p>
             </div>
         </div>

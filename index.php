@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <?php
+
 session_start();
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['id']) && !isset($_SESSION['guest'])) {
 	header("location: login.php");
 	exit;
 }
 
+$nameToDisplay = isset($_SESSION['guest']) ? $_SESSION['guest'] : $_SESSION['name'];
 ?>
 <html>
 
@@ -326,7 +328,7 @@ if (!isset($_SESSION['id'])) {
 
 					<div class="flex items-center gap-2 font-semibold text-ellipsis overflow-hidden">
 						<p>Hi, </p>
-						<p><?= $_SESSION['name'] ?></p>
+						<p><?php echo $nameToDisplay; ?></p>
 					</div>
 				</div>
 

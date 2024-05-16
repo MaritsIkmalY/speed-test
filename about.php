@@ -19,9 +19,12 @@
     <?php
     include 'connect.php';
 
-    if (!isset($_SESSION['id'])) {
-        header('Location: login.php');
+    if (!isset($_SESSION['id']) && !isset($_SESSION['guest'])) {
+        header("location: login.php");
+        exit;
     }
+    
+    $nameToDisplay = isset($_SESSION['guest']) ? $_SESSION['guest'] : $_SESSION['name'];
 
     ?>
     <div class="bg-gradient h-full text-white min-h-screen flex gap-4">
@@ -35,7 +38,7 @@
 
                     <div class="flex items-center gap-2 font-semibold text-ellipsis overflow-hidden">
                         <p>Hi, </p>
-                        <p><?= $_SESSION['name'] ?></p>
+                        <p><?= $nameToDisplay ?></p>
                     </div>
                 </div>
 

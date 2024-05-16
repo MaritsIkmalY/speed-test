@@ -18,7 +18,7 @@ $ul = $_POST['ul'];
 $ping = $_POST['ping'];
 $jitter = $_POST['jitter'];
 $log = $_POST['log'];
-$userId= $_SESSION['id'];
+$userId = $_SESSION['id'];
 
 if (isset($redact_ip_addresses) && true === $redact_ip_addresses) {
     $ip = '0.0.0.0';
@@ -37,9 +37,34 @@ header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0, s-maxage=
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 
-$id = insertSpeedtestUser($userId, $ip, $ispinfo, $extra, $ua, $lang, $dl, $ul, $ping, $jitter, $log);
-if (false === $id) {
-    exit(1);
-}
+if (isset($_SESSION['guest'])) {
+    $data = unserialize($_COOKIE['userData']);
 
-echo 'id '.$id;
+    $dl = $_POST['dl'];
+    $ul = $_POST['ul'];
+    $ping = $_POST['ping'];
+    $jitter = $_POST['jitter'];
+    $log = $_POST['log'];
+
+    $newData = array(
+        "dl" => $dl,
+        "ul" => $ul,
+        "ping" => $ping,
+        "jitter" => $jitter,
+        "log" => $log,
+        "timestamp" => date('Y-m-d H:i:s')
+    );
+
+    $data[] = $newData;
+
+    $serializedData = serialize($data);
+
+    setcookie("userData", $serializedData, time() + (86400 * 30), "/");
+} else {
+    $id = insertSpeedtestUser($userId, $ip, $ispinfo, $extra, $ua, $lang, $dl, $ul, $ping, $jitter, $log);
+    if (false === $id) {
+        exit(1);
+    }
+
+    echo 'id ' . $id;
+}
