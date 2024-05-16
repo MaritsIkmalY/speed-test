@@ -44,7 +44,7 @@
 
                 <div class="bg-glass rounded-2xl p-8 w-full mt-16">
                     <ul class="flex flex-col gap-8">
-                        <li><button class="py-4 mx-auto flex items-center justify-center text-sm"><a href="/speed-test/index.php"><img src="./assets/Home Page.png" alt="home" class="inline-block h-4"> Home</a></button></li>
+                        <li><button class="py-4 mx-auto flex items-center justify-center text-sm"><a href="index.php"><img src="./assets/Home Page.png" alt="home" class="inline-block h-4"> Home</a></button></li>
                         <li> <button class="py-4 mx-auto flex items-center justify-center text-sm"><a href="history.php"><img src="./assets/Time Machine.png" alt="about us" class="inline-block h-4"> History</a></button></li>
                         <li><button class="bg-gradient py-4 px-16 mx-auto flex items-center justify-center rounded-2xl border-2 text-sm"><a href="about.php" class=""><img src="./assets/Information.png" alt="about us" class="inline-block h-4"> About Us</a></button></li>
                     </ul>
